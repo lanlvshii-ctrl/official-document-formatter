@@ -1,0 +1,9 @@
+# Runtime artifacts
+*_raw.md
+*_structured.md
+公文排版后-*.docx
+勘误建议表.docx
+~$*.docx
+
+# Local config (may contain secrets)
+references/api_config.yaml

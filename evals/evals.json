@@ -1,0 +1,64 @@
+[
+  {
+    "id": "E001",
+    "name": "正向触发：公文排版",
+    "input": "帮我排版一份公文，是关于安全生产管理的通知",
+    "expected_trigger": true,
+    "expected_behavior": "触发技能，执行提取→标注→排版流程"
+  },
+  {
+    "id": "E002",
+    "name": "正向触发：红头文件",
+    "input": "这个红头文件格式不对，能帮我按国标重新排吗？",
+    "expected_trigger": true,
+    "expected_behavior": "触发技能，识别红头文件和国标格式需求"
+  },
+  {
+    "id": "E003",
+    "name": "负向触发：学术论文",
+    "input": "我的毕业论文需要排版，能帮忙吗？",
+    "expected_trigger": false,
+    "expected_behavior": "不触发技能，说明本工具不适用于学术论文"
+  },
+  {
+    "id": "E004",
+    "name": "负向触发：技术文档",
+    "input": "帮我把这个API文档排版一下",
+    "expected_trigger": false,
+    "expected_behavior": "不触发技能，说明本工具不适用于技术文档"
+  },
+  {
+    "id": "E005",
+    "name": "PDF输入+表格保留",
+    "input": "这份PDF通知有表格，帮我按GB/T 9704排版",
+    "expected_trigger": true,
+    "expected_behavior": "触发技能，提取PDF（含表格），保留表格为Word表格，应用国标格式"
+  },
+  {
+    "id": "E006",
+    "name": "错误钩子容错：旧版方括号钩子",
+    "input_data": {
+      "structured_md": "[公文-标题]关于XX的通知\n[公文-正文]各有关单位："
+    },
+    "expected_trigger": true,
+    "expected_behavior": "docx_formatter.py 的 parse_structured_md 将旧版 [公文-XXX] 视为无钩子段落，兜底为 BODY，不会崩溃"
+  },
+  {
+    "id": "E007",
+    "name": "错误钩子容错：缺失钩子",
+    "input_data": {
+      "structured_md": "关于XX的通知\n\n各有关单位："
+    },
+    "expected_trigger": true,
+    "expected_behavior": "无钩子段落自动兜底为 BODY，排版不崩溃"
+  },
+  {
+    "id": "E008",
+    "name": "错误钩子容错：非法钩子类型",
+    "input_data": {
+      "structured_md": "<!--HOOK:FOOTER-->页脚内容\n<!--HOOK:BODY-->正文内容"
+    },
+    "expected_trigger": true,
+    "expected_behavior": "非法钩子 FOOTER 不在 valid_hooks 中，兜底为 BODY，排版不崩溃"
+  }
+]

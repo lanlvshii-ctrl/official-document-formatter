@@ -1,0 +1,8 @@
+# 官方文档格式化器 - API 配置示例（独立模式使用）
+# 复制此文件到 ~/.config/official-document-formatter/api_config.yaml 并填入你的真实 API Key
+# Hosted 版在 WorkBuddy / CodeBuddy 等宿主环境中使用时，通常无需配置此文件
+
+api_key: "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+base_url: "https://api.openai.com/v1"
+model: "gpt-4o"
+model_reasoning: "o1-preview"
